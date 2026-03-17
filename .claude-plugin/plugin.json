@@ -2,6 +2,6 @@
   "name": "outside-in-tdd",
   "version": "0.1.0",
   "description": "Outside-In TDD workflow — starts from E2E tests, drills down through architecture layers with RED-GREEN-REFACTOR cycles. Requires project-level tdd-registry.md and testing skills.",
-  "skills": ["skills/outside-in-tdd", "skills/self-improvement"],
+  "skills": ["skills/outside-in-tdd", "skills/self-improvement", "skills/run", "skills/improve"],
   "agents": ["agents/*.md"]
 }
