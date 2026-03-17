@@ -69,6 +69,43 @@ Read `.claude/agents/tdd-test-writer-contract.md` for the full input specificati
 - Do not assert the absence of old behavior being replaced — tests for the new design implicitly replace the old (e.g., don't write "button should NOT be red" alongside "button should be blue"). Negation is fine when testing boundaries, validation, or access control (e.g., "request should be rejected when rate limit exceeded").
 - **File operations**: Always use Write to create new files and Edit to modify existing files. Never use Bash with cat, heredoc, or echo redirection for file creation or modification.
 
+### Mock Contract Fidelity
+
+When tests require mocks (external APIs, databases, LLMs, third-party services), follow these rules:
+
+**1. Producer-Driven Mock**: Mock responses must reflect what the **producer** (real service) returns, not what the **consumer** (code under test) expects. Ask "what does the real service return for this input?" — not "what does my code need?"
+
+```
+[WRONG] "Parser expects {p, c, r}" → mock returns {p, c, r}
+[RIGHT] "API responds with {what, when, effect}" → mock returns {what, when, effect}
+```
+
+**2. Fidelity Hierarchy**: Prefer real implementations over fakes, and fakes over mocks. Use mocks only at boundaries you don't own (external APIs, third-party services, LLMs).
+
+**3. Schema Completeness**: Mock responses must include all fields the real service returns, even fields the consumer doesn't currently use. Partial mocks hide integration bugs.
+
+**4. Contract Tests**: When a mock boundary exists, write at least one contract test that verifies the mock's shape matches the real producer's interface. When the producer changes, the contract test fails → forces mock update.
+
+```
+test_mock_matches_api_schema:
+  Given: mock_response fields
+  When:  compare to real API response schema
+  Then:  all fields present, types match
+```
+
+### Cross-Module Interface Tests
+
+When a layer has multiple units that pass data between each other (e.g., parser output feeds into store input), write at least one cross-module test per interface boundary:
+
+```
+test_parser_output_feeds_store:
+  Given: parser produces output from valid input
+  When:  store.ingest(parser_output)
+  Then:  no type errors, data retrievable
+```
+
+This catches interface mismatches that individual unit tests miss.
+
 ### Non-Existent Types in Code-Generated Systems
 
 When tests reference types/models from a code-generated system (ORM, API codegen) that don't exist yet, the testing skill for this layer documents how to bypass compile-time checking so tests fail at runtime (right failure) instead of compile time (wrong failure). Follow the skill's guidance for the specific mechanism.

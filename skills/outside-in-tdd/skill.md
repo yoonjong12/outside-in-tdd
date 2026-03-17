@@ -285,18 +285,21 @@ Invoke the `tdd-test-writer` agent to Write ALL tests needed for the target laye
 
 Before invoking the test-writer, construct the behaviour list and present it to the user for review. The behaviour list defines what unit/integration tests will verify for this layer.
 
-Derive the list from the Phase 1 plan's unit enumeration for this layer, the user's feature request, and constraint-derived behaviors (see point 4 above). Group behaviors by implementation file.
+Derive the list from the Phase 1 plan's unit enumeration for this layer, the user's feature request, and constraint-derived behaviors (see point 4 above). Group behaviors by implementation file. Use Given/When/Then format with concrete values — this removes ambiguity and gives the test-writer executable specs rather than vague descriptions.
 
 Present to the user:
 
 > **[layer] layer test behaviour list:**
 >
 > `[file path 1]`:
-> - [behaviour 1]
-> - [behaviour 2]
+> - Given: [concrete initial state] / When: [action with args] / Then: [assert condition]
+> - Given: [state] / When: [action] / Then: [expected outcome]
 >
 > `[file path 2]`:
-> - [behaviour 1]
+> - Given: [state] / When: [action] / Then: [expected outcome]
+>
+> **Mock boundaries** (if any):
+> - [boundary]: mock [target] — producer contract: [what the real service returns]
 >
 > Add, modify, or remove items? Or approve to proceed.
 
