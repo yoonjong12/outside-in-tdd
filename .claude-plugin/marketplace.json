@@ -1,0 +1,10 @@
+{
+  "plugins": [
+    {
+      "name": "outside-in-tdd",
+      "description": "Outside-In TDD workflow — E2E-first, layer-by-layer RED-GREEN-REFACTOR with interactive user checkpoints. Requires project-level tdd-registry.md and testing skills.",
+      "version": "0.1.0",
+      "path": "."
+    }
+  ]
+}
