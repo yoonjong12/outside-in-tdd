@@ -139,18 +139,28 @@ Add, modify, or remove items?
 
 ### Layer Behaviour List (Phase 3)
 
-Before each layer's unit tests are written, you confirm the behaviours:
+Before each layer's unit tests are written, you confirm the behaviours in Given/When/Then format:
 
 ```
 backend layer test behaviour list:
 
 src/pages/api/todos/[id].ts:
-- PATCH toggles completed field
-- Missing ID → 404
-- Non-PATCH method → 405
+- Given: todo exists with completed=false / When: PATCH /api/todos/123 / Then: completed=true
+- Given: no todo with id 999 / When: PATCH /api/todos/999 / Then: 404
+- Given: any state / When: GET /api/todos/123 / Then: 405
+
+Mock boundaries:
+- Database: mock PrismaClient — producer contract: returns {id, title, completed, createdAt}
 
 Add, modify, or remove items?
 ```
+
+## Commands
+
+| Command | Purpose |
+|---------|---------|
+| `/outside-in-tdd:run <feature> [--design <path>] [--debug]` | Start a TDD session. Pre-flight checks project config, then invokes the orchestrator. |
+| `/outside-in-tdd:improve [skills\|agents\|registry\|all]` | Health check — analyzes registry, skills, and agents for gaps and friction, applies fixes with user approval. |
 
 ## Plugin Components
 
