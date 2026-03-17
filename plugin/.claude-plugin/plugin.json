@@ -1,0 +1,10 @@
+{
+  "name": "outside-in-tdd",
+  "description": "Outside-In TDD workflow — E2E-first, layer-by-layer RED-GREEN-REFACTOR with interactive user checkpoints.",
+  "author": {
+    "name": "yoonjong12"
+  },
+  "repository": "https://github.com/yoonjong12/outside-in-tdd",
+  "license": "MIT",
+  "keywords": ["tdd", "testing", "outside-in", "red-green-refactor"]
+}
