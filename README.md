@@ -34,12 +34,6 @@ claude plugin marketplace add yoonjong12/outside-in-tdd
 claude plugin install outside-in-tdd@yoonjong12-outside-in-tdd --scope user
 ```
 
-Or for a single session:
-
-```bash
-claude --plugin-dir /path/to/outside-in-tdd-plugin
-```
-
 ## Project Setup
 
 The plugin provides the workflow engine. Each project provides its own configuration in `.claude/`:
