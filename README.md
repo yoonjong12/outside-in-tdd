@@ -26,12 +26,9 @@ The ⏸️ checkpoints are where the plugin pauses for your input. You control *
 
 ## Install
 
-```bash
-# Add this repo as a marketplace
-claude plugin marketplace add yoonjong12/outside-in-tdd
-
-# Install at user level (available in all projects)
-claude plugin install outside-in-tdd@yoonjong12-outside-in-tdd --scope user
+```
+/plugin marketplace add yoonjong12/outside-in-tdd
+/plugin install outside-in-tdd@outside-in-tdd
 ```
 
 ## Project Setup
